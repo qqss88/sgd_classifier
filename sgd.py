@@ -1,10 +1,9 @@
 #!/usr/bin/python2.7
 import numpy as np
 import matplotlib.pyplot as pt
-import random
-import pylab
+from pylab import ylim
 
-# get data from csv file and store in matrix 'data'
+# get data from csv file and store in the 'data' matrix
 data = np.loadtxt('cancer.csv', delimiter=',')
 data = data[:369,:]	# the problem only wants the 1st 369 rows
 
@@ -33,7 +32,7 @@ def new_ab(x,y,a,b,lmbda,n):
     ''' 
     SCALARS: y,lmda,n,b
     VECTORS: x,a
-    formulas are in the middle of p.338
+    formulas are in the middle of page 338
     '''
     if y*(np.dot(a,x)+b) >= 1:
         a_new = a - n*(lmbda*a)   # n = steplength
@@ -75,7 +74,7 @@ for l in range(len(lmbdas)):   # for each regularization weight
 
         for s in range(N_s):  # for each step (100 total)
             # select a random data item
-            i = random.randint(0,49)
+            i = np.random.randint(0,50)
             data_item = subset[i]
             
             x = data_item[:9]
@@ -84,7 +83,7 @@ for l in range(len(lmbdas)):   # for each regularization weight
             # update a and b
             a,b = new_ab(x,y,a,b,lmbda,n)
             
-            # plot the accuracy every 10 steps:
+            # plot the accuracy at every 10 steps:
             if (s+1)%10 == 0:
                 errors[z] = determine_accuracy(a,b,validation_set)
                 z += 1  
@@ -95,7 +94,7 @@ pt.figure()
 pt.title('Cancer Classification Errors Using SGD Method')  
 for i in range(4):
     pt.plot(errors_list[i], label=lmbdas[i])
-    pylab.ylim([0,2])   
+    ylim([0,2])   # from pylab
      
 pt.xlabel('Steps')
 pt.ylabel('Error')
