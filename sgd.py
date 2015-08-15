@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python2.7
 import numpy as np
 import matplotlib.pyplot as pt
 import random
