@@ -5,7 +5,7 @@ from pylab import ylim
 
 # get data from csv file and store in the 'data' matrix
 data = np.loadtxt('cancer.csv', delimiter=',')
-data = data[:369,:]	# the problem only wants the 1st 369 rows
+data = data[:369,:]	# we want only the first 369 rows
 
 np.random.shuffle(data)
 lmbdas = np.array([1e-3, 1e-2, 1e-1, 1])
